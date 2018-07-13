@@ -26,9 +26,9 @@ module Divider(clock, timer_reset, enable);
 	output enable;
 	reg enable;
 	
-	reg[3:0] internal_counter = 3'd0;	//a counter used to count upto clock speed
+	reg[3:0] internal_counter = 4'd0;	//a counter used to count upto clock speed
 	//parameter system_max = 25'd26_999_999;//the clock speed of the system = 2.7MHz
-	parameter system_max = 3'd7;//for tests consider 8Hz clock
+	parameter system_max = 4'd3;//for tests consider 8Hz clock
 	
 
 	always @(posedge clock)
@@ -36,7 +36,7 @@ module Divider(clock, timer_reset, enable);
 			enable = 0;
 			if(internal_counter==system_max /*|| timer_reset*/)
 				begin
-					internal_counter <= 3'd0; //set the counter to zero as first incrementing step
+					internal_counter <= 4'd0; //set the counter to zero as first incrementing step
 					enable = 1;
 				end
 			else

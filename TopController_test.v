@@ -4,7 +4,7 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   21:26:25 07/12/2018
+// Create Date:   14:33:10 07/13/2018
 // Design Name:   TopController
 // Module Name:   /home/tharushi/Programs/HDL/Traffic_Light_Controller/TopController_test.v
 // Project Name:  Traffic_Light_Controller
@@ -32,7 +32,6 @@ module TopController_test;
 	reg reprogram;
 	reg [1:0] time_param_selector;
 	reg [3:0] time_value;
-	reg time_val;
 
 	// Outputs
 	wire Rm;
@@ -42,9 +41,6 @@ module TopController_test;
 	wire Ys;
 	wire Gs;
 	wire W;
-	wire st_state;
-	wire expired_state;
-	wire enable_state;
 
 	// Instantiate the Unit Under Test (UUT)
 	TopController uut (
@@ -61,11 +57,7 @@ module TopController_test;
 		.Rs(Rs), 
 		.Ys(Ys), 
 		.Gs(Gs), 
-		.W(W), 
-		.st_state(st_state), 
-		.expired_state(expired_state), 
-		.enable_state(enable_state), 
-		.time_val(time_val)
+		.W(W)
 	);
 	initial begin
 		forever #10 clock = ~clock;
@@ -79,7 +71,6 @@ module TopController_test;
 		reprogram = 0;
 		time_param_selector = 0;
 		time_value = 0;
-		time_val = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
@@ -87,10 +78,10 @@ module TopController_test;
 		// Add stimulus here
 		reset = 0;
 		
-		#2100
+		#2060
 		sensor = 1;
 		
-		#1200
+		#1300
 		sensor = 0;
 		
 		#100 walk_request = 1;
@@ -98,11 +89,10 @@ module TopController_test;
 		
 		#500;
 		time_param_selector = 0;
-		time_param_selector = 4'd6;
+		time_value = 4'd4;
 		
-		#1000 reprogram = 1;
+		#1100 reprogram = 1;
 		#20 reprogram = 0;
-		
 	end
       
 endmodule

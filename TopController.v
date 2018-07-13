@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module TopController(clock, reset, sensor, walk_request, reprogram, time_param_selector, time_value, Rm, Ym, Gm, Rs, Ys, Gs, W, st_state, expired_state, enable_state, time_val);
+module TopController(clock, reset, sensor, walk_request, reprogram, time_param_selector, time_value, Rm, Ym, Gm, Rs, Ys, Gs, W/*, st_state, expired_state, enable_state, time_val*/);
 	input clock;
 	input reset;
 	input sensor;
@@ -35,9 +35,9 @@ module TopController(clock, reset, sensor, walk_request, reprogram, time_param_s
 	output W;
 	
 	//this section is to output test values--------------
-	output st_state, expired_state, enable_state;
+	//output st_state, expired_state, enable_state;
 	reg st_state, expired_state, enable_state;
-	output[3:0] time_val;
+	//output[3:0] time_val;
 	reg[3:0] time_val;
 	//---------------------------------------------------
 	wire reset_sync;
@@ -94,7 +94,7 @@ module TopController(clock, reset, sensor, walk_request, reprogram, time_param_s
 						.reset_sync(reset_sync), 
 						.enable(enable_1Hz), 
 						.value(value), 
-						.start_timer(start_timer), 
+						.start_timer(st_state), 
 						.expired(expired), 
 						.divider_reset(divider_reset));
 						
